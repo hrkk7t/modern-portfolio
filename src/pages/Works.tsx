@@ -168,6 +168,22 @@ const worksData: WorkItem[] = [
     }
   },
   { 
+    id: 13, 
+    category: 'dev', 
+    thumbnail: '/images/thumb-portfolio.webp',
+    image: '/images/portfolio.webp', 
+    title: 'モダン・ポートフォリオサイト（本サイト）', 
+    shortDesc: 'React / TypeScript / Framer Motionを駆使した、型安全でリッチなUI/UXを持つSPA。', 
+    url: 'https://github.com/hrkk7t/modern-portfolio',
+    details: {
+      period: '2026.06',
+      role: 'UI・UXデザイン / フロントエンド実装',
+      tech: ['React', 'TypeScript', 'Vite', 'Framer Motion', 'CSS3'],
+      challenge: 'バックエンドや業務自動化（Python/GAS）の実績が中心となる中で、モダンなフロントエンド環境におけるUI/UX設計とインタラクションの実装力を直接証明する成果物が必要だった。',
+      solution: '本ポートフォリオ自体を「React + TypeScript + Vite」構成でスクラッチ開発。Framer Motionを用いたシームレスなページ遷移や、モーダル時のスクロール制御、全画面ズーム機能などの高度なインタラクションを自作。TypeScriptによる厳格な型定義で堅牢なコンポーネント設計を行い、フロントエンドエンジニアとしての実装力をサイト自体で証明している。'
+    }
+  },
+  { 
     id: 10, 
     category: 'graphic', 
     thumbnail: '/images/thumb-graphic-01.webp',
