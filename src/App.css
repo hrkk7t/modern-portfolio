@@ -300,8 +300,30 @@ body::after {
   font-size: 0.9rem;
   line-height: 2;
   color: var(--text-muted);
-  margin-bottom: 60px;
+  margin-bottom: 25px;
   font-weight: 300;
+}
+
+.about-links {
+  margin-bottom: 60px;
+}
+
+.github-link {
+  display: inline-block;
+  border: 1px solid var(--text-color);
+  color: var(--text-color);
+  text-decoration: none;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  padding: 10px 25px;
+  transition: all 0.3s;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+}
+
+.github-link:hover {
+  background: var(--text-color);
+  color: var(--bg-color);
 }
 
 .section-subtitle {

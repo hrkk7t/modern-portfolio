@@ -13,7 +13,7 @@ type ToolCategory = {
 };
 
 const strengthsData: StrengthItem[] = [
-  { name: "TypeScript / React", detail: "厳格な型チェック（strict: true）のコンパイルオプションをクリアした、堅牢で型安全なコンポーネント設計。既存のJavaScript環境からの完全な移行・リファクタリングを完遂。" },
+  { name: "TypeScript / React", detail: "厳格な型チェック（strict: true）のコンパイルオプションをクリアした、堅牢で型安全なコンポーポネント設計。既存のJavaScript環境からの完全な移行・リファクタリングを完遂。" },
   { name: "Python / GAS", detail: "WordPress APIを活用した入稿補助ツールや自動集約システムを自作。年間1,000件以上のデータを整理し、業務の75%を自動化した仕組み化の実装力。" },
   { name: "UI/UX 情報設計", detail: "教員経験で培った「論理的言語化能力」を武器に、ユーザーの認知負荷を下げて迷わせない設計を徹底。システムを理解しエンジニアと共通言語で対話可能。" }
 ];
@@ -66,9 +66,13 @@ function About() {
               8年間の県立高校教諭を経て、Web・システム開発の世界へ転身。
               現在は印刷会社DX事業部にて、言葉の背景にある意図を読み解く力と、テクノロジーによる「仕組みのデザイン」を融合させた開発・制作に従事しています。
             </p>
+            <div className="about-links">
+              <a href="https://github.com/hrkk7t/modern-portfolio" target="_blank" rel="noopener noreferrer" className="github-link">
+                GITHUB ➔
+              </a>
+            </div>
           </div>
 
-          {/* --- セクション1：核心的な強み（コア・ストレングス） --- */}
           <div className="strengths-section">
             <h3 className="section-subtitle">CORE STRENGTHS</h3>
             <div className="strengths-grid">
@@ -81,7 +85,6 @@ function About() {
             </div>
           </div>
 
-          {/* --- セクション2：使用ツール・スキル一覧（テクニカル・ツールズ） --- */}
           <div className="tools-section">
             <h3 className="section-subtitle">TECHNICAL TOOLS & SKILLS</h3>
             {toolsData.map((cat, idx) => (

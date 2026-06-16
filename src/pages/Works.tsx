@@ -1,4 +1,3 @@
-/* --- Works.tsx --- */
 import PageTransition from '../components/PageTransition';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { useState, useEffect } from 'react';
@@ -8,6 +7,7 @@ type WorkItem = {
   category: string;
   thumbnail: string;
   image: string;
+  flowImage?: string;
   title: string;
   shortDesc: string;
   url: string;
@@ -122,6 +122,7 @@ const worksData: WorkItem[] = [
     category: 'dev', 
     thumbnail: '/images/thumb-dev-01.webp',
     image: '/images/dev-01.webp', 
+    flowImage: '/images/oshi-note-flow.webp',
     title: '推し活アプリ「Oshi Note」', 
     shortDesc: 'API連携と深いインサイトから、ファンの事務的ストレスを徹底排除したWebアプリ。', 
     url: 'https://oshi-note.com/',
@@ -154,6 +155,7 @@ const worksData: WorkItem[] = [
     category: 'dev', 
     thumbnail: '/images/thumb-dev-03.webp',
     image: '/images/dev-03.webp', 
+    flowImage: '/images/dev-03-code.webp',
     title: '入稿補助システム開発', 
     shortDesc: 'PDFからWordPress下書きへ自動解析・生成を行う内製業務効率化システム。', 
     url: '',
@@ -178,7 +180,7 @@ const worksData: WorkItem[] = [
       role: 'メインビジュアル制作（アイソメトリックイラスト）',
       tech: ['Illustrator'],
       challenge: '専門度が高いサービス全体の構造がユーザーにとって「分かりにくく、堅苦しい」印象を与えてしまい、直帰・離脱リスクを引き起こしていた。',
-      solution: '立体的な空間構造を分かりやすく視覚化できる「アイソメトリック図法」を採用。専門的で冷たい印象を完全に払拭するため、丸みのある滑らかなフォルムと清潔感のあるクリーンなカラー構成で描き起こし、直感的な理解度を高め離脱を防止。'
+      solution: '立体的な空間構造を分かりやすく視覚化できる「アイソメトリック図法」を採用。専門的で冷たい印象を完全に払拭するため、丸みのある滑らかなフォルム and 清潔感のあるクリーンなカラー構成で描き起こし、直感的な理解度を高め離脱を防止。'
     }
   },
   { 
@@ -223,13 +225,14 @@ const revealVariants: Variants = {
 function Works() {
   const [activeFilter, setActiveFilter] = useState('all');
   const [selectedWork, setSelectedWork] = useState<WorkItem | null>(null);
+  const [enlargedImage, setEnlargedImage] = useState<string | null>(null);
 
   const filteredWorks = worksData.filter(work =>
     activeFilter === 'all' ? true : work.category === activeFilter
   );
 
   useEffect(() => {
-    if (selectedWork) {
+    if (selectedWork || enlargedImage) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
@@ -237,7 +240,7 @@ function Works() {
     return () => {
       document.body.style.overflow = '';
     };
-  }, [selectedWork]);
+  }, [selectedWork, enlargedImage]);
 
   const handlePrev = () => {
     if (!selectedWork) return;
@@ -308,9 +311,38 @@ function Works() {
                 <button className="modal-close-btn" onClick={() => setSelectedWork(null)}>✕</button>
                 <div className="modal-body">
                   <div className="modal-body-inner">
-                    <div className="modal-image-pane">
-                      <img src={selectedWork.image} alt={selectedWork.title} />
+                    
+                    <div 
+                      className="modal-image-pane" 
+                      style={{ 
+                        flexDirection: 'column', 
+                        justifyContent: selectedWork.flowImage ? 'flex-start' : 'center',
+                        gap: '40px',
+                        padding: selectedWork.flowImage ? '50px 30px' : '30px'
+                      }}
+                    >
+                      <img 
+                        src={selectedWork.image} 
+                        alt={selectedWork.title} 
+                        onClick={() => setEnlargedImage(selectedWork.image)}
+                        style={{ cursor: 'zoom-in' }} 
+                      />
+                      
+                      {selectedWork.flowImage && (
+                        <div style={{ width: '100%' }}>
+                          <h4 style={{ color: '#666', fontSize: '0.75rem', letterSpacing: '0.15em', marginBottom: '15px', fontFamily: 'Montserrat, sans-serif', borderBottom: '1px solid #222', paddingBottom: '10px' }}>
+                            SYSTEM ARCHITECTURE & DATA FLOW
+                          </h4>
+                          <img 
+                            src={selectedWork.flowImage} 
+                            alt="システム構成図" 
+                            onClick={() => setEnlargedImage(selectedWork.flowImage || null)}
+                            style={{ width: '100%', height: 'auto', borderRadius: '4px', cursor: 'zoom-in' }} 
+                          />
+                        </div>
+                      )}
                     </div>
+
                     <div className="modal-text-pane">
                       <span className="modal-category">{selectedWork.category.toUpperCase()}</span>
                       <h2>{selectedWork.title}</h2>
@@ -361,6 +393,57 @@ function Works() {
             </div>
           )}
         </AnimatePresence>
+
+        <AnimatePresence>
+          {enlargedImage && (
+            <motion.div 
+              className="fullscreen-image-overlay" 
+              onClick={() => setEnlargedImage(null)}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              style={{
+                position: 'fixed',
+                top: 0, left: 0, width: '100vw', height: '100vh',
+                backgroundColor: 'rgba(0, 0, 0, 0.95)',
+                backdropFilter: 'blur(10px)',
+                WebkitBackdropFilter: 'blur(10px)',
+                zIndex: 11000,
+                display: 'flex', justifyContent: 'center', alignItems: 'center',
+                cursor: 'zoom-out'
+              }}
+            >
+              <button 
+                onClick={() => setEnlargedImage(null)}
+                style={{
+                  position: 'absolute', top: '30px', right: '40px',
+                  background: 'none', border: 'none', color: '#a0a0a0',
+                  fontSize: '1.8rem', cursor: 'pointer', zIndex: 11001,
+                  fontFamily: 'Montserrat, sans-serif'
+                }}
+              >
+                ✕
+              </button>
+
+              <motion.img 
+                src={enlargedImage} 
+                alt="Enlarged View" 
+                initial={{ scale: 0.95, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.95, opacity: 0 }}
+                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                style={{ 
+                  maxWidth: '90vw', 
+                  maxHeight: '85vh', 
+                  objectFit: 'contain',
+                  boxShadow: '0 20px 50px rgba(0,0,0,0.5)'
+                }}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
+
       </div>
     </PageTransition>
   );
