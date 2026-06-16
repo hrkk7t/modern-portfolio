@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_レイヤー_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 419.31 415.7">
+  <style>
+    path { fill: #ffffff; }
+    @media (prefers-color-scheme: light) {
+      path { fill: #0a0a0a; }
+    }
+  </style>
+  <path d="M290.6.63h-99.9v146.48h-90.8V0H0v415.7h99.9v-175.79h90.8v82.34c0,51.61,41.84,93.45,93.45,93.45h135.16v-101.1h-81.99c-25.8,0-46.72-20.91-46.72-46.72v-27.97h128.71v-92.8h-128.71V.63h0Z"/>
+</svg>
